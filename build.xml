@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<project name="Alfresco User Spreadsheet Upload" default="dist">
+   <property name="project.dir" value="."/>
+   <property name="build.dir" value="${project.dir}/build"/>
+   <property name="config.dir" value="${project.dir}/config"/>
+
+   <property name="amp.dir" value="${build.dir}/dist" />
+   <property name="amp.file" value="${amp.dir}/UserUploadDashlet.amp"/>
+
+   <target name="clean">
+      <delete dir="${build.dir}" />
+   </target>
+
+   <target name="init">
+      <mkdir dir="${build.dir}" />
+      <mkdir dir="${build.dir}/classes" />
+      <mkdir dir="${amp.dir}" />
+   </target>
+
+   <target name="compile" depends="init" />
+   <target name="package-jar" depends="init,compile" />
+
+   <target name="package-amp" depends="init,package-jar">
+       <zip destfile="${amp.file}" >
+          <fileset dir="${project.dir}/config/alfresco/module/com.quanticate.opensource.userupload" 
+                   includes="module.properties" />
+          <zipfileset dir="${project.dir}/config" 
+                   includes="**" excludes="**/module.properties" 
+                   prefix="config" />
+       </zip>
+   </target>
+
+   <target name="dist" depends="package-amp">
+      <echo message="Packaging Completed" />
+      <echo message="You should now install the AMP into Share" />
+      <echo message=""/>
+      <echo message="Share:  ${amp.file}"/>
+   </target>
+</project>
