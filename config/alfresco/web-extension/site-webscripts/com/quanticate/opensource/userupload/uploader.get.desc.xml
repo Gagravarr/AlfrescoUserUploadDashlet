@@ -1,0 +1,8 @@
+<webscript>
+   <shortname>User Uploader</shortname>
+   <description>Uploads Users into the System, from Spreadsheets, and supplies the templates</description>
+   <family>user-dashlet</family>
+   <url>/com/quanticate/userupload</url>
+   <authentication>user</authentication>
+   <format default="html">any</format>
+</webscript>
